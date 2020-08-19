@@ -30,7 +30,7 @@ public class BairroController {
 	}*/
 	
 	public String teste() {
-		//@GetMapping
+		@GetMapping
 		return "Testando a aplicação";
 		}
 	

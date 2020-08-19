@@ -6,7 +6,7 @@ import com.frotas.web.domain.Agendamento;
 
 public class AgendamentoDTO {
 private Long id;
-private String nome;
+private String horario;
 
 public static AgendamentoDTO create(Agendamento agendamento) {
 	ModelMapper modelMapper = new ModelMapper();
@@ -21,12 +21,12 @@ public void setId(Long id) {
 	this.id = id;
 }
 
-public String getNome() {
-	return nome;
+public String getHorario() {
+	return horario;
 }
 
-public void setNome(String nome) {
-	this.nome = nome;
+public void setHorario(String horario) {
+	this.horario = horario;
 }
 
 
