@@ -1,8 +1,8 @@
 package com.frotas.web.repository;
-import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.frotas.web.domain.Bairro;
-public interface BairroDao extends JpaRepositoryImplementation<Bairro, Long> {
+public interface BairroDao extends JpaRepository<Bairro, Long> {
 	/*Bairro save(Bairro bairro);
 	void update(Bairro bairro);
 	void delete(Long id);

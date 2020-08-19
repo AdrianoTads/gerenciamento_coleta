@@ -7,6 +7,8 @@ import com.frotas.web.domain.Agendamento;
 public class AgendamentoDTO {
 private Long id;
 private String horario;
+private Integer tipoColeta;
+private Integer diaSemana;
 
 public static AgendamentoDTO create(Agendamento agendamento) {
 	ModelMapper modelMapper = new ModelMapper();
