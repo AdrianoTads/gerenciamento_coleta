@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.frotas.web.domain.Agendamento;
 import com.frotas.api.dto.AgendamentoDTO;
+import com.frotas.api.dto.BairroDTO;
 import com.frotas.web.service.AgendamentoService;
 
 @RestController
@@ -33,6 +34,11 @@ public class AgendamentoController {
 	@Autowired
 	private AgendamentoService service;
 	
+	
+	@GetMapping()
+	public ResponseEntity<List<AgendamentoDTO>> listaDeAgendamentos(){
+		return ResponseEntity.ok(service.findAll());
+	}
 		
 	@GetMapping()
 	public ResponseEntity<AgendamentoService> List(){

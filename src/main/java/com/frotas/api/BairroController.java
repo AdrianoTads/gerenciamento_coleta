@@ -33,9 +33,16 @@ public class BairroController {
 	private BairroService service;
 	
 	@GetMapping()
+	public ResponseEntity<List<BairroDTO>> listaDeBairros(){
+		return ResponseEntity.ok(service.findAll());
+	}
+	
+	@GetMapping()
 	public ResponseEntity<BairroService> List(){
 		return ResponseEntity.ok(service);
 	}
+	
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<BairroDTO> getBairro(@PathVariable("id") Long id){
 		Optional<BairroDTO> bairro = service.findById(id);
