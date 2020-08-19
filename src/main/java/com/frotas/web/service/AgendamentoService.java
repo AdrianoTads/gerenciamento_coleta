@@ -9,7 +9,7 @@ import com.frotas.web.domain.Agendamento;
 public interface AgendamentoService {
 	Agendamento save(Agendamento agendamento);
 	Agendamento update(Agendamento agendamento);
-	void delete(Long id);
+	void delete(Agendamento agendamento);
 	Optional<AgendamentoDTO> findById(Long id);
 	List<AgendamentoDTO> findAll();
 	//Regras
