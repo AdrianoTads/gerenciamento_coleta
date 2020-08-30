@@ -27,26 +27,26 @@ public class AgendamentoController {
 
 	@PostMapping("/salvar")
 	public String salvar(Agendamento agendamento, RedirectAttributes attr) {
-		service.save(agendamento);
+		service.saveAgendamento(agendamento);
 		attr.addFlashAttribute("success", "Agendamento adicionado com sucesso!");
 		return "redirect:/agendamento/cadastrar";
 	}
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-	model.addAttribute("agendamentos", service.findAll());
+	model.addAttribute("agendamentos", service.getAgendamentos());
 	return "agendamento/lista_agendamento";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-	model.addAttribute("agendamento", service.findById(id));
+	model.addAttribute("agendamento", service.getAgendamentoPorId(id));
 	return "/agendamento/cadastro_agendamento";
 	}
 	
 	@PostMapping("/editar")
 	public String editar(Agendamento agendamento, RedirectAttributes attr) {
-		service.update(agendamento);
+		service.updateAgendamento(id, agendamento);
 		attr.addFlashAttribute("success", "Agendamento alterado com sucesso");
 		return "redirect:/agendamento/cadastrar";
 	}

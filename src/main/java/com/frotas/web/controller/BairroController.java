@@ -26,26 +26,26 @@ public class BairroController {
 
 	@PostMapping("/salvar")
 	public String salvar(Bairro bairro, RedirectAttributes attr) {
-		service.save(bairro);
+		service.saveBairro(bairro);
 		attr.addFlashAttribute("success", "Bairro adicionado com sucesso!");
 		return "redirect:/bairro/cadastrar";
 	}
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-	model.addAttribute("bairros", service.findAll());
+	model.addAttribute("bairros", service.getBairros());
 	return "bairro/lista_bairro";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-	model.addAttribute("bairro", service.findById(id));
+	model.addAttribute("bairro", service.getBairroPorId(id));
 	return "/bairro/cadastro_bairro";
 	}
 	
 	@PostMapping("/editar")
 	public String editar(Bairro bairro, RedirectAttributes attr) {
-		service.update(bairro);
+		service.updateBairro(id, bairro);
 		attr.addFlashAttribute("success", "Bairro alterado com sucesso");
 		return "redirect:/bairro/cadastrar";
 	}

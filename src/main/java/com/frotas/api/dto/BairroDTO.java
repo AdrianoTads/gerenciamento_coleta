@@ -11,6 +11,7 @@ private String nome;
 public static BairroDTO create(Bairro bairro) {
 	ModelMapper modelMapper = new ModelMapper();
 	return modelMapper.map(bairro, BairroDTO.class);
+	//return null;
 }
 
 public Long getId() {

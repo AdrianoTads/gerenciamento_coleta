@@ -23,29 +23,16 @@ import com.frotas.web.service.BairroService;
 @RestController
 @RequestMapping("/api/bairros")
 public class BairroController {
-	
-	public String teste() {
-		//@GetMapping
-		return "Testando a aplicação";
-		}
-	
 	@Autowired
 	private BairroService service;
 	
 	@GetMapping()
-	public ResponseEntity<List<BairroDTO>> listaDeBairros(){
-		return ResponseEntity.ok(service.findAll());
+	public ResponseEntity<List<BairroDTO>> getBairro(){
+		return ResponseEntity.ok(service.getBairros());
 	}
-	
-	@GetMapping()
-	public ResponseEntity<BairroService> List(){
-		return ResponseEntity.ok(service);
-	}
-	
-	
 	@GetMapping("/{id}")
 	public ResponseEntity<BairroDTO> getBairro(@PathVariable("id") Long id){
-		Optional<BairroDTO> bairro = service.findById(id);
+		Optional<BairroDTO> bairro = service.getBairroPorId(id);
 		if(bairro.isPresent()) {
 			return ResponseEntity.ok(bairro.get());
 		}else {
@@ -54,9 +41,9 @@ public class BairroController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<BairroDTO> save(@RequestBody Bairro bairro){
+	public ResponseEntity<BairroDTO> saveBairro(@RequestBody Bairro bairro){
 		try {
-			Bairro x = service.save(bairro);
+			BairroDTO x = service.saveBairro(bairro);
 			URI location = getUri(x.getId());
 			return ResponseEntity.created(location).build();
 		} catch (Exception e) {
@@ -70,9 +57,9 @@ public class BairroController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Bairro> update(@PathVariable("id") Long id, @RequestBody Bairro bairro){
+	public ResponseEntity<BairroDTO> updateBairro(@PathVariable("id") Long id, @RequestBody Bairro bairro){
 		bairro.setId(id);
-		Bairro x = service.update(bairro);
+		BairroDTO x = service.updateBairro(id, bairro);
 		if(x != null) {
 			return ResponseEntity.ok(x);
 		}else {
@@ -80,12 +67,12 @@ public class BairroController {
 		}
 	}
 	
-	/*@DeleteMapping
-	public ResponseEntity<BairroDTO> delete(@PathVariable("id") Long id){
-		if(service.delete(id)) {
+	@DeleteMapping
+	public ResponseEntity<BairroDTO> deleteBairro(@PathVariable("id") Long id){
+		if(service.deleteBairro(id)) {
 			return ResponseEntity.ok().build();
 		}else {
 			return ResponseEntity.notFound().build();
 		}
-	}*/
+	}
 }

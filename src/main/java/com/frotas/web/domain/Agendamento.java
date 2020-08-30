@@ -35,6 +35,10 @@ public class Agendamento extends AbstractEntity<Long> {
 		return horario;
 	}
 
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
 	public void setData(String horario) {
 		this.horario = horario;
 	}

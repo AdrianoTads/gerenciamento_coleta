@@ -19,34 +19,21 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.frotas.web.domain.Agendamento;
 import com.frotas.api.dto.AgendamentoDTO;
-import com.frotas.api.dto.BairroDTO;
 import com.frotas.web.service.AgendamentoService;
 
 @RestController
 @RequestMapping("/api/agendamentos")
 public class AgendamentoController {
-	
-	public String teste() {
-		//@GetMapping
-		return "Testando a aplicação";
-		}
-	
 	@Autowired
 	private AgendamentoService service;
 	
-	
 	@GetMapping()
-	public ResponseEntity<List<AgendamentoDTO>> listaDeAgendamentos(){
-		return ResponseEntity.ok(service.findAll());
-	}
-		
-	@GetMapping()
-	public ResponseEntity<AgendamentoService> List(){
-		return ResponseEntity.ok(service);
+	public ResponseEntity<List<AgendamentoDTO>> getAgendamento(){
+		return ResponseEntity.ok(service.getAgendamentos());
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<AgendamentoDTO> getAgendamento(@PathVariable("id") Long id){
-		Optional<AgendamentoDTO> agendamento = service.findById(id);
+		Optional<AgendamentoDTO> agendamento = service.getAgendamentoPorId(id);
 		if(agendamento.isPresent()) {
 			return ResponseEntity.ok(agendamento.get());
 		}else {
@@ -57,7 +44,7 @@ public class AgendamentoController {
 	@PostMapping
 	public ResponseEntity<AgendamentoDTO> saveAgendamento(@RequestBody Agendamento agendamento){
 		try {
-			Agendamento x = service.save(agendamento);
+			AgendamentoDTO x = service.saveAgendamento(agendamento);
 			URI location = getUri(x.getId());
 			return ResponseEntity.created(location).build();
 		} catch (Exception e) {
@@ -71,9 +58,9 @@ public class AgendamentoController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Agendamento> update(@PathVariable("id") Long id, @RequestBody Agendamento agendamento){
+	public ResponseEntity<AgendamentoDTO> updateAgendamento(@PathVariable("id") Long id, @RequestBody Agendamento agendamento){
 		agendamento.setId(id);
-		Agendamento x = service.update(agendamento);
+		AgendamentoDTO x = service.updateAgendamento(id, agendamento);
 		if(x != null) {
 			return ResponseEntity.ok(x);
 		}else {
@@ -81,12 +68,12 @@ public class AgendamentoController {
 		}
 	}
 	
-	/*@DeleteMapping
-	public ResponseEntity<AgendamentoDTO> delete(@PathVariable("id") Long id){
-		if(service.delete(id)) {
+	@DeleteMapping
+	public ResponseEntity<AgendamentoDTO> deleteAgendamento(@PathVariable("id") Long id){
+		if(service.deleteAgendamento(id)) {
 			return ResponseEntity.ok().build();
 		}else {
 			return ResponseEntity.notFound().build();
 		}
-	}*/
+	}
 }
